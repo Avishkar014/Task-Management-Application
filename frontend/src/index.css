@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100% }
+  body { @apply bg-slate-50 text-slate-900 antialiased }
+}
+
+@layer components {
+  .btn { @apply px-4 py-2 rounded-lg font-medium shadow-sm bg-brand-500 text-white hover:bg-brand-600 transition }
+  .card { @apply bg-white rounded-2xl p-6 shadow-lg border border-slate-100 }
+  .input { @apply w-full p-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-200 }
+  .glass { @apply bg-white/60 backdrop-blur-md rounded-3xl border border-slate-100 p-6 shadow-xl }
+  .brand-badge { @apply w-12 h-12 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white font-semibold }
+  .badge-pending { @apply px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800 }
+  .badge-completed { @apply px-2 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700 }
+}
