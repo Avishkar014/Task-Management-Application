@@ -1,145 +1,238 @@
-Task Management Application
+Task Management Application — Full Stack (React + Node + JWT + CRUD + Tests)
 
-This project is a full-stack Task Management Application developed as part of my internship assessment. It includes a React frontend, a Node.js/Express backend, and complete documentation for setup, testing, and API usage. The goal of this application is to provide a clean, reliable system for creating, updating, and tracking tasks with proper authentication and structured API endpoints.
+A modern full-stack task management system where users can register, log in, and securely manage their personal tasks.
+The project includes JWT authentication, protected APIs, CRUD operations, frontend state management, and fully working Jest test suites for both backend and frontend.
 
-🌟 What This Project Demonstrates
-
-Understanding of frontend + backend architecture
-
-Clean API design with Express + MongoDB
-
-Secure authentication using JWT
-
-Component-based UI using React + Vite
-
-Ability to write and run unit tests for both frontend and backend
-
-Clear project documentation and developer-friendly setup
-
-📁 Project Structure
-Task-Management-Application/
-│
-├── backend/        # Express API
-├── frontend/       # React application
-├── README.md
-├── .gitignore
-└── .env.example
-
-🛠️ Tech Stack Used
+🚀 Tech Stack
 Frontend
 
-React (Vite)
-
-Axios
+React + Vite
 
 TailwindCSS
 
+Redux Toolkit
+
+Axios
+
+React Hook Form + Zod
+
+Jest + React Testing Library (unit tests)
+
 Backend
 
-Node.js
-
-Express.js
-
-MongoDB + Mongoose
+Node.js + Express
 
 JWT Authentication
 
-Testing
+In-Memory or Database (Pluggable)
 
-Jest + Supertest (Backend)
+Jest + Supertest (API tests)
 
-Vitest + React Testing Library (Frontend)
+📂 Project Structure
+/frontend
+  └── src/
+       ├── components/
+       ├── pages/
+       ├── store/
+       ├── api/
+       ├── lib/
+       └── __tests__
 
-This stack was chosen because it reflects modern industry standards and enables fast development with maintainable code.
+/backend
+  └── src/
+       ├── app.js
+       └── routes, controllers, middleware
+  └── tests/
 
 ⚙️ Local Setup Instructions
-1. Clone the repository
-git clone https://github.com/Avishkar014/Task-Management-Application.git
-cd Task-Management-Application
+1) Clone the repository
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
 
-2. Install backend dependencies
+🖥️ Backend Setup
 cd backend
 npm install
 
-3. Install frontend dependencies
-cd ../frontend
-npm install
-
-4. Configure environment variables
-
-Inside /backend/.env:
-
-PORT=4000
-MONGO_URI=mongodb://localhost:27017/taskapp
-JWT_SECRET=your-secret-key
+Run the backend
+node src/app.js
 
 
-A sample .env.example is included in the repository.
+The server starts at:
 
-▶️ Running the Application
-Start Backend
-cd backend
-npm run dev
-
-
-Runs on:
 http://localhost:4000
 
-Start Frontend
-cd ../frontend
+Run backend tests
+npm test
+
+Backend coverage report
+npm run test:coverage
+
+
+View output in:
+
+/backend/coverage/backend/index.html
+
+🎨 Frontend Setup
+cd frontend
+npm install
+
+Start frontend dev server
 npm run dev
 
 
-Runs on:
+Vite will show the local URL:
+
 http://localhost:5173
 
-🧪 Running Tests & Viewing Coverage
-Backend Tests
-cd backend
-npm test
+Frontend tests
+npm run test
 
-
-Coverage:
-
+Frontend coverage
 npm run test:coverage
+
+
+View report at:
+
+/frontend/coverage/lcov-report/index.html
+
+🔐 Authentication Workflow
+Register
+
+User creates an account using:
+
+username
+
+password
+
+Login
+
+User receives:
+
+user object
+
+JWT token
+
+The frontend stores the token in localStorage.
+All protected requests send:
+
+Authorization: Bearer <token>
+
+📌 API Endpoints Documentation
+Auth Routes
+POST /api/auth/register
+
+Registers a new user.
+
+Body:
+
+{
+  "username": "john",
+  "password": "123456"
+}
+
+POST /api/auth/login
+
+Returns JWT token for valid credentials.
+
+Response:
+
+{
+  "user": { "username": "john" },
+  "token": "jwt-token-here"
+}
+
+Task Routes (Protected)
+
+All routes require:
+
+Authorization: Bearer <token>
+
+GET /api/tasks
+
+Returns the tasks belonging to the logged-in user.
+
+POST /api/tasks
+
+Create a new task.
+
+Body Example:
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, eggs, bread",
+  "status": "pending"
+}
+
+PUT /api/tasks/:id
+
+Update an existing task.
+
+DELETE /api/tasks/:id
+
+Delete a task.
+
+🧪 Testing Overview
+Backend Tests
+
+Includes:
+
+Authentication (register & login)
+
+Authorization middleware
+
+Task CRUD operations
+Tech used:
+
+Jest
+
+Supertest
 
 Frontend Tests
-cd frontend
-npm test
+
+Includes:
+
+Form validation using Zod
+
+Component rendering
+
+UI interactions
+Tech used:
+
+Jest
+
+React Testing Library
+
+📊 Coverage
+
+Both frontend and backend generate full coverage reports.
+
+Backend:
+
+coverage/backend/index.html
 
 
-Coverage:
+Frontend:
 
-npm run test:coverage
+coverage/lcov-report/index.html
 
 
-Coverage reports will be available inside a coverage/ directory.
+You can open these files in a browser to view line-level coverage.
 
-📘 API Documentation
-Auth
-Method	Endpoint	Description
-POST	/api/auth/register	Register a new user
-POST	/api/auth/login	Login and receive a JWT
-Tasks
-Method	Endpoint	Description
-GET	/api/tasks	Fetch all tasks
-POST	/api/tasks	Create a task
-GET	/api/tasks/:id	Fetch a single task
-PUT	/api/tasks/:id	Update a task
-DELETE	/api/tasks/:id	Remove a task
+📌 Notes
 
-All task routes require a valid authentication token.
+Backend test server uses an in-memory database for predictable and repeatable tests.
 
-🎯 Why This Project Is Valuable for an Internship
+You can switch to PostgreSQL/Mongo by updating app.js and keeping the same routes.
 
-Shows practical experience with REST APIs, frontend frameworks, and database integrations.
+All test files are located in /backend/tests and /frontend/src/__tests__.
 
-Demonstrates ability to write clean, testable code.
+🎉 Conclusion
 
-Includes proper documentation, making the project easy to evaluate.
+This full-stack application demonstrates:
 
-Reflects real-world development workflows used in industry.
-
-📄 License
-
-This project is available under the MIT License.
+✔ Secure user authentication
+✔ Protected API routing
+✔ Modern React UI with Tailwind
+✔ Fully working Redux state management
+✔ Complete backend + frontend test coverage
+✔ Clean and scalable architecture
